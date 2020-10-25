@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/userAgreementFragment">
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.garrymckee.powdermills.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_buildingDetailFragment"
+            app:destination="@id/buildingDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buildingDetailFragment"
+        android:name="com.garrymckee.powdermills.buildinglist.BuildingListFragment"
+        android:label="BuildingDetailFragment" />
+    <fragment
+        android:id="@+id/userAgreementFragment"
+        android:name="com.garrymckee.powdermills.useragreement.UserAgreementFragment"
+        android:label="UserAgreementFragment" >
+        <action
+            android:id="@+id/action_userAgreementFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+</navigation>

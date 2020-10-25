@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/powderMillsTeal</color>
+    <color name="colorPrimaryDark">@color/powderMillsTeal</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="powderMillsTeal">#31A093</color>
+    <color name="titleTextColor">#274653</color>
+    <color name="disabledButton">#6C828A</color>
+    <color name="buttonEnabledColor">#274653</color>
+    <color name="checkboxTextColor">#274653</color>
+</resources>
