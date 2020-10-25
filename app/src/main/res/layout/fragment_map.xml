@@ -6,7 +6,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".map.MapFragment">
+        tools:context=".ui.map.MapFragment">
 
         <Button
             android:id="@+id/show_building_list_button"

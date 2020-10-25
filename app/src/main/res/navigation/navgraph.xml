@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.garrymckee.powdermills.map.MapFragment"
+        android:name="com.garrymckee.powdermills.ui.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/buildingDetailFragment"
-        android:name="com.garrymckee.powdermills.buildinglist.BuildingListFragment"
+        android:name="com.garrymckee.powdermills.ui.buildinglist.BuildingListFragment"
         android:label="BuildingDetailFragment" />
     <fragment
         android:id="@+id/userAgreementFragment"

@@ -1,4 +1,4 @@
-package com.garrymckee.powdermills.buildinglist
+package com.garrymckee.powdermills.ui.buildinglist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

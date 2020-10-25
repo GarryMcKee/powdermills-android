@@ -1,15 +1,13 @@
-package com.garrymckee.powdermills.buildinglist
+package com.garrymckee.powdermills.ui.buildinglist
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.garrymckee.powdermills.R
 import com.garrymckee.powdermills.databinding.FragmentBuildingListBinding
 import dagger.hilt.android.AndroidEntryPoint
 

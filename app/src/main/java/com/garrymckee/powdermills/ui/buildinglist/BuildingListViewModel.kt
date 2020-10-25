@@ -1,9 +1,11 @@
-package com.garrymckee.powdermills.buildinglist
+package com.garrymckee.powdermills.ui.buildinglist
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
-import com.garrymckee.powdermills.domain.building.BuildingRepository
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.garrymckee.powdermills.domain.building.Building
+import com.garrymckee.powdermills.domain.building.BuildingRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
