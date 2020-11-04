@@ -18,6 +18,6 @@ class SharedPreferencesStorage @Inject constructor(@ApplicationContext context: 
     }
 
     fun setUserAgreement(hasUserAgreed: Boolean) {
-        prefs.edit().putBoolean(USER_AGREEMENT_KEY, hasUserAgreed).commit()
+        prefs.edit().putBoolean(USER_AGREEMENT_KEY, hasUserAgreed).apply()
     }
 }
