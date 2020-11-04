@@ -1,8 +1,8 @@
 package com.garrymckee.powdermills.di
 
+import com.garrymckee.powdermills.data.buildinglist.BuildingRepositoryImpl
+import com.garrymckee.powdermills.data.useragreement.UserAgreementRepositoryImpl
 import com.garrymckee.powdermills.domain.building.BuildingRepository
-import com.garrymckee.powdermills.data.BuildingRepositoryImpl
-import com.garrymckee.powdermills.data.UserAgreementRepositoryImpl
 import com.garrymckee.powdermills.domain.useragreement.UserAgreementRepository
 import dagger.Binds
 import dagger.Module

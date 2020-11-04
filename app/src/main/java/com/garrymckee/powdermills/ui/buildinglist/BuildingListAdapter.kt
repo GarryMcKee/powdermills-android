@@ -22,6 +22,7 @@ class BuildingListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(buildingItem: BuildingListUIModel) {
             binding.buildingName.text = buildingItem.title
+            binding.buildingImage.setImageResource(buildingItem.imageResId)
         }
     }
 }

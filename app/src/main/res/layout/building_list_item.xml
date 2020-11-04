@@ -1,19 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="146dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/building_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/building3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="60dp"
+            android:src="@drawable/building_list_item_gradient"
+            app:layout_constraintBottom_toBottomOf="@id/building_image"
+            app:layout_constraintEnd_toEndOf="@id/building_image"
+            app:layout_constraintStart_toStartOf="@id/building_name"
+            app:layout_constraintTop_toTopOf="@id/building_image" />
 
         <TextView
             android:id="@+id/building_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="12dp"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/buildingItemNameColor"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:text="Building One" />
+
+        <ImageView
+            android:id="@+id/chevron"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:elevation="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/chevron"
+            app:layout_constraintBottom_toBottomOf="@id/building_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/building_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,24 +5,24 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/powderMillsTeal"
         android:paddingTop="36dp"
-        android:paddingBottom="64dp"
-        android:background="@color/powderMillsTeal">
+        android:paddingBottom="64dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="16dp"
             android:background="@android:color/white"
             android:elevation="10dp"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginEnd="36dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/termsTitleTextView"
@@ -41,72 +41,73 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/termsScrollView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:fillViewport="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:scrollbars="vertical"
-            android:scrollbarThumbVertical="@drawable/scroll_bar_thumb"
-            android:scrollbarTrackVertical="@drawable/scroll_bar_track"
-            android:scrollbarStyle="outsideInset"
-            android:requiresFadingEdge="vertical"
-            android:fadingEdgeLength="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/termsTitleTextView"
-            app:layout_constraintBottom_toTopOf="@id/agreeCheckBox">
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/termsScrollView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                android:fadingEdgeLength="50dp"
+                android:fillViewport="true"
+                android:requiresFadingEdge="vertical"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbarThumbVertical="@drawable/scroll_bar_thumb"
+                android:scrollbarTrackVertical="@drawable/scroll_bar_track"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toTopOf="@id/agreeCheckBox"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/termsTitleTextView">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_light"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="2sp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/terms_and_conditions_text" />
+            </androidx.core.widget.NestedScrollView>
+
+            <CheckBox
+                android:id="@+id/agreeCheckBox"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_light"
-                android:letterSpacing="0.05"
-                android:lineSpacingExtra="2sp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/terms_and_conditions_text" />
-        </androidx.core.widget.NestedScrollView>
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:buttonTint="@color/buttonEnabledColor"
+                android:checked="false"
+                android:fontFamily="@font/opensans_light"
+                android:letterSpacing=".1"
+                android:text="@string/terms_and_conditions_checkbox_text"
+                android:textAlignment="textEnd"
+                android:textColor="@color/checkboxTextColor"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toTopOf="@id/continueButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <CheckBox
-            android:id="@+id/agreeCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:textColor="@color/checkboxTextColor"
-            android:textStyle="normal"
-            android:fontFamily="@font/opensans_light"
-            android:textAlignment="textEnd"
-            android:letterSpacing=".1"
-            app:layout_constraintBottom_toTopOf="@id/continueButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:checked="true"
-            android:buttonTint="@color/buttonEnabledColor"
-            android:text="@string/terms_and_conditions_checkbox_text"/>
-
-        <Button
-            android:id="@+id/continueButton"
-            android:background="@drawable/round_button"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:paddingStart="32dp"
-            android:paddingEnd="32dp"
-            android:textStyle="normal"
-            android:fontFamily="@font/opensans_light"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="16dp"
-            android:text="@string/continueButtonText" />
+            <Button
+                android:id="@+id/continueButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/round_button"
+                android:enabled="false"
+                android:fontFamily="@font/opensans_light"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/continueButtonText"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

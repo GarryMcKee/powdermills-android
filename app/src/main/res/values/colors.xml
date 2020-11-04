@@ -8,4 +8,5 @@
     <color name="disabledButton">#6C828A</color>
     <color name="buttonEnabledColor">#274653</color>
     <color name="checkboxTextColor">#274653</color>
+    <color name="buildingItemNameColor">#FFFFFF</color>
 </resources>
