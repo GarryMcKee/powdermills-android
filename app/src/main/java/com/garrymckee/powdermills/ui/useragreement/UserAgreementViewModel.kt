@@ -1,24 +1,23 @@
-package com.garrymckee.powdermills.useragreement
+package com.garrymckee.powdermills.ui.useragreement
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.garrymckee.powdermills.domain.useragreement.UserAgreement
 import com.garrymckee.powdermills.domain.useragreement.UserAgreementRepository
-import kotlinx.coroutines.flow.collect
+import com.garrymckee.powdermills.ui.Event
 import kotlinx.coroutines.launch
 
 class UserAgreementViewModel @ViewModelInject constructor(
     private val userAgreementRepository: UserAgreementRepository
 ) : ViewModel() {
-    val isAgreed = MutableLiveData<Boolean>()
 
-    fun checkIfUserHasAgreed() =
+    val continueToMapScreen = MutableLiveData<Event<Boolean>>()
+
+    fun updateUserAgreement(userAgreement: UserAgreement) =
         viewModelScope.launch {
-            userAgreementRepository
-                .observeHasUserAgreed()
-                .collect { userAgreement ->
-                    isAgreed.postValue(userAgreement.hasAgreed)
-                }
+            userAgreementRepository.updateUserAgreement(userAgreement)
+            continueToMapScreen.postValue(Event(true))
         }
 }
