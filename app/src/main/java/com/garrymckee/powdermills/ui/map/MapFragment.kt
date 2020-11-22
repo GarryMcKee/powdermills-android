@@ -20,7 +20,7 @@ class MapFragment : Fragment() {
         val model: MapViewModel by viewModels()
 
         binding.showBuildingListButton.setOnClickListener {
-            findNavController().navigate(MapFragmentDirections.actionMapFragmentToBuildingDetailFragment())
+            findNavController().navigate(MapFragmentDirections.actionMapFragmentToBuildingListFragment())
         }
 
         return binding.root

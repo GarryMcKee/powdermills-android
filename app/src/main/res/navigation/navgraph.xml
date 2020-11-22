@@ -18,21 +18,22 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_mapFragment_to_hilt_BuildingListFragment"
-            app:destination="@id/hilt_BuildingListFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            android:id="@+id/action_mapFragment_to_buildingListFragment"
+            app:destination="@id/buildingListFragment" />
     </fragment>
     <fragment
         android:id="@+id/buildingDetailFragment"
-        android:name="com.garrymckee.powdermills.ui.buildinglist.BuildingListFragment"
-        android:label="BuildingDetailFragment" />
+        android:name="com.garrymckee.powdermills.ui.buildingdetail.BuildingDetailFragment"
+        android:label="BuildingDetailFragment">
+        <argument
+            android:name="buildingName"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/userAgreementFragment"
         android:name="com.garrymckee.powdermills.ui.useragreement.UserAgreementFragment"
-        android:label="UserAgreementFragment" >
+        android:label="UserAgreementFragment"
+        tools:layout="@layout/fragment_user_agreement">
         <action
             android:id="@+id/action_userAgreementFragment_to_mapFragment"
             app:destination="@id/mapFragment"
@@ -44,22 +45,23 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/hilt_BuildingListFragment"
-        android:name="com.garrymckee.powdermills.ui.buildinglist.Hilt_BuildingListFragment"
-        android:label="Hilt_BuildingListFragment">
-        <action
-            android:id="@+id/action_hilt_BuildingListFragment_to_buildingDetailFragment"
-            app:destination="@id/buildingDetailFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/splashFragment"
         android:name="com.garrymckee.powdermills.ui.splashscreen.SplashFragment"
-        android:label="SplashFragment">
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_userAgreementFragment"
             app:destination="@id/userAgreementFragment" />
         <action
             android:id="@+id/action_splashFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buildingListFragment"
+        android:name="com.garrymckee.powdermills.ui.buildinglist.BuildingListFragment"
+        android:label="BuildingListFragment">
+        <action
+            android:id="@+id/action_buildingListFragment_to_buildingDetailFragment"
+            app:destination="@id/buildingDetailFragment" />
     </fragment>
 </navigation>

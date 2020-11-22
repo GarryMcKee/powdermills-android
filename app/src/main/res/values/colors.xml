@@ -9,4 +9,9 @@
     <color name="buttonEnabledColor">#274653</color>
     <color name="checkboxTextColor">#274653</color>
     <color name="buildingItemNameColor">#FFFFFF</color>
+    <color name="detail_section_title_color">#FFFFFF</color>
+    <color name="history_section_title_background">#576D7E</color>
+    <color name="function_section_title_background">#3D829F</color>
+    <color name="trivia_section_title_background">#99C8BF</color>
+    <color name="background_color">#FFFFFF</color>
 </resources>

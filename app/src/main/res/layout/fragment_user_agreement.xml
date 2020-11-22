@@ -69,6 +69,7 @@
                     android:lineSpacingExtra="2sp"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
+                    android:gravity="center"
                     android:text="@string/terms_and_conditions_text" />
             </androidx.core.widget.NestedScrollView>
 

@@ -7,4 +7,4 @@ data class BuildingListUIModel(
     val imageResId: Int
 )
 
-fun Building.mapToBuildingListUIModel() = BuildingListUIModel(this.name, this.imageResId)
+fun Building.mapToBuildingListUIModel() = BuildingListUIModel(this.name, this.menuImageResId)
