@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="60dp"
+            android:paddingTop="90dp"
             android:src="@drawable/building_list_item_gradient"
             app:layout_constraintBottom_toBottomOf="@id/building_image"
             app:layout_constraintEnd_toEndOf="@id/building_image"
