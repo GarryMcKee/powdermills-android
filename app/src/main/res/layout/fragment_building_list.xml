@@ -34,10 +34,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/bebasneue_bold"
+            android:letterSpacing="0.05"
             android:text="@string/building_list_title_text"
             android:textAllCaps="true"
             android:textColor="#3D5A66"
             android:textSize="30sp"
+            android:scaleX="0.7"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
