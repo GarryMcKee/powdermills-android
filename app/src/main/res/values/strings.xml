@@ -13,4 +13,6 @@
 6.3Changes to the Terms: We may, at our discretion and without notice, amend the Terms from time to time, the most recent of whichwill be located on this App.6.4Severability: If the whole or any part of a provision of these Terms is or becomes illegal, invalid or unenforceable, then the provisionso found shall be deemed severable and deleted from them.6.5Assignment: We may, at our discretion assign or transfer any right, title or interest in this App to any successors in title to ourbusinessor to a third party.
     </string>
     <string name="back_button_cd_text">Back Button</string>
+    <string name="mapbox_access_token">pk.eyJ1Ijoia2V2aW5tY2dhcnJ5IiwiYSI6ImNraGFoaG56cjFjbnkzMGwybWozeTBlYXMifQ.m_uliyq42bjqqpuMj3dlmA</string>
+    <string name="mapbox_style_url">"mapbox://styles/kevinmcgarry/ckhahij881umy19n08trhee74"</string>
 </resources>

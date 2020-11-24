@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.garrymckee.powdermills.R
 import com.garrymckee.powdermills.databinding.FragmentMapBinding
+import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.maps.Style
 
 class MapFragment : Fragment() {
 
@@ -15,9 +18,16 @@ class MapFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding : FragmentMapBinding = FragmentMapBinding.inflate(inflater)
 
+        Mapbox.getInstance(this.requireContext(), getString(R.string.mapbox_access_token))
+        val binding: FragmentMapBinding = FragmentMapBinding.inflate(inflater)
         val model: MapViewModel by viewModels()
+        val map = binding.mapView
+
+        map.onCreate(savedInstanceState)
+        map.getMapAsync { mapboxMap ->
+            mapboxMap.setStyle(Style.Builder().fromUri(getString(R.string.mapbox_style_url)))
+        }
 
         binding.showBuildingListButton.setOnClickListener {
             findNavController().navigate(MapFragmentDirections.actionMapFragmentToBuildingListFragment())
