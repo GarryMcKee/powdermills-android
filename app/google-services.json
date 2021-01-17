@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "848002652846",
+    "firebase_url": "https://powdermills-dd66a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "powdermills-dd66a",
+    "storage_bucket": "powdermills-dd66a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848002652846:android:cc9508517cb87ddaca2b3f",
+        "android_client_info": {
+          "package_name": "com.garrymckee.powdermills.domain.building"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848002652846-mfslvfo1fktb4daor0rqlbrja76det52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuHW9nBSpT4Xa2XheuMJVI-HVlUcxWc5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848002652846-mfslvfo1fktb4daor0rqlbrja76det52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
