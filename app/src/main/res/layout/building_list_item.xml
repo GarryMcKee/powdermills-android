@@ -13,7 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/building3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +21,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="90dp"
+            android:paddingTop="120dp"
             android:src="@drawable/building_list_item_gradient"
             app:layout_constraintBottom_toBottomOf="@id/building_image"
             app:layout_constraintEnd_toEndOf="@id/building_image"

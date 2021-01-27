@@ -13,5 +13,5 @@
     <color name="history_section_title_background">#3E4E5B</color>
     <color name="function_section_title_background">#3D829F</color>
     <color name="trivia_section_title_background">#6FBCAE</color>
-    <color name="background_color">#FFFFFF</color>
+    <color name="background_color">#F2F2F2</color>
 </resources>

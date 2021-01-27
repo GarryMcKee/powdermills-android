@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:848002652846:android:cc9508517cb87ddaca2b3f",
         "android_client_info": {
-          "package_name": "com.garrymckee.powdermills.domain.building"
+          "package_name": "com.garrymckee.powdermills"
         }
       },
       "oauth_client": [

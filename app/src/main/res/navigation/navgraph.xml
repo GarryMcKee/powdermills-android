@@ -26,8 +26,8 @@
         android:name="com.garrymckee.powdermills.ui.buildingdetail.BuildingDetailFragment"
         android:label="BuildingDetailFragment">
         <argument
-            android:name="buildingName"
-            app:argType="string" />
+            android:name="buildingId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/userAgreementFragment"

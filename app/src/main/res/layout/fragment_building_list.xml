@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F2F2F2"
+        android:background="@color/background_color"
         tools:context=".ui.map.MapFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,13 +33,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/bebasneue_bold"
-            android:letterSpacing="0.05"
+            android:fontFamily="@font/bebasneue_regular"
+            android:letterSpacing="0.2"
             android:text="@string/building_list_title_text"
             android:textAllCaps="true"
             android:textColor="#3D5A66"
-            android:textSize="30sp"
-            android:scaleX="0.7"
+            android:scaleX="0.5"
+            android:textFontWeight="20"
+            android:textSize="35sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
