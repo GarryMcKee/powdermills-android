@@ -13,13 +13,15 @@ class BuildingDetailViewModel @ViewModelInject constructor(
     private val buildingRepository: BuildingRepository
 ) : ViewModel() {
 
-    val carouselImageResIds = MutableLiveData<List<Int>>()
+    val carouselImageResIds = MutableLiveData<List<String>>()
     val titleTextLiveData = MutableLiveData<String>()
     val historyTextLiveData = MutableLiveData<String>()
     val functionTextLiveData = MutableLiveData<String>()
     val triviaTextLiveData = MutableLiveData<String>()
+    val showFunFactsLiveData = MutableLiveData<Boolean>()
+    val hideFunFactsLiveData = MutableLiveData<Boolean>()
 
-    fun observeBuildingWithId(buildingId: String) =
+    fun observeBuildingWithId(buildingId: Long) =
         viewModelScope.launch {
             buildingRepository.observeBuildingWithId(buildingId)
                 .collect { building ->
@@ -28,10 +30,19 @@ class BuildingDetailViewModel @ViewModelInject constructor(
         }
 
     private fun renderBuildingDetail(buildingDetail: Building) {
-        carouselImageResIds.value = buildingDetail.carouselImageResIds
+        carouselImageResIds.value = buildingDetail.otherImageUrls
         titleTextLiveData.value = buildingDetail.name
         historyTextLiveData.value = buildingDetail.history
         functionTextLiveData.value = buildingDetail.function
-        triviaTextLiveData.value = buildingDetail.trivia
+        renderFunFacts(buildingDetail.funFacts)
+    }
+
+    private fun renderFunFacts(funfacts: List<String>) {
+        if (funfacts.isNotEmpty()) {
+            showFunFactsLiveData.value = true
+            triviaTextLiveData.value = funfacts.joinToString(separator = "\n")
+        } else {
+            hideFunFactsLiveData.value = true
+        }
     }
 }

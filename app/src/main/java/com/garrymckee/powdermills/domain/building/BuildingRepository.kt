@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface BuildingRepository {
     suspend fun observeBuildings(): Flow<List<Building>>
-    suspend fun observeBuildingWithId(id: String): Flow<Building>
+    suspend fun observeBuildingWithId(id: Long): Flow<Building>
 }

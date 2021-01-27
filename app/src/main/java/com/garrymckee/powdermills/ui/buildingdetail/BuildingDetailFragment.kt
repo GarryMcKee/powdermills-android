@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.garrymckee.powdermills.databinding.FragmentBuildingDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,7 @@ class BuildingDetailFragment : Fragment() {
         binding.backButton.setOnClickListener { this.findNavController().popBackStack() }
 
         subscribeLiveData()
-        viewModel.observeBuildingWithId(args.buildingName)
+        viewModel.observeBuildingWithId(args.buildingId)
 
         return binding.root
     }
@@ -51,11 +52,23 @@ class BuildingDetailFragment : Fragment() {
         viewModel.triviaTextLiveData.observe(viewLifecycleOwner, Observer {
             binding.triviaDetailText.text = it
         })
+
+        viewModel.showFunFactsLiveData.observe(viewLifecycleOwner, Observer {
+            binding.funFactsVisiblityGroup.visibility = View.VISIBLE
+        })
+
+        viewModel.hideFunFactsLiveData.observe(viewLifecycleOwner, Observer {
+            binding.funFactsVisiblityGroup.visibility = View.GONE
+        })
     }
 
-    private fun setupCarousel(it: List<Int>) {
+    private fun setupCarousel(it: List<String>) {
         binding.carouselView.setImageListener { position, imageView ->
-            imageView.setImageResource(it[position])
+            Glide
+                .with(binding.root.context)
+                .load(it[position])
+                .centerCrop()
+                .into(imageView)
         }
         binding.carouselView.pageCount = it.size
     }
