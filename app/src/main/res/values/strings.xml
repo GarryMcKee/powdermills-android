@@ -15,4 +15,5 @@
     <string name="back_button_cd_text">Back Button</string>
     <string name="mapbox_access_token">pk.eyJ1Ijoia2V2aW5tY2dhcnJ5IiwiYSI6ImNraGFoaG56cjFjbnkzMGwybWozeTBlYXMifQ.m_uliyq42bjqqpuMj3dlmA</string>
     <string name="mapbox_style_url">"mapbox://styles/kevinmcgarry/ckhahij881umy19n08trhee74"</string>
+    <string name="location_permissions_rationale">Location permissions are required to use the map feature to navigate the park.</string>
 </resources>
