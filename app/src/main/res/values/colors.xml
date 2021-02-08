@@ -5,6 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="powderMillsTeal">#31A093</color>
     <color name="titleTextColor">#274653</color>
+    <color name="splashTitleColor">#FFFFFF</color>
     <color name="disabledButton">#6C828A</color>
     <color name="buttonEnabledColor">#274653</color>
     <color name="checkboxTextColor">#274653</color>

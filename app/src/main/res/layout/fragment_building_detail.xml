@@ -12,8 +12,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="16dp"
-            android:background="@color/background_color">
+            android:background="@color/background_color"
+            android:paddingBottom="16dp">
 
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/carouselView"
@@ -21,26 +21,37 @@
                 android:layout_height="200dp"
                 app:autoPlay="false"
                 app:fillColor="#FFFFFF"
-                app:indicatorVisibility="gone"
+                app:indicatorVisibility="visible"
+                app:layout_constraintCircleRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:pageColor="#FFFFFF"
                 app:radius="6dp"
                 app:strokeColor="#FF777777"
-                android:elevation="20dp"
                 app:strokeWidth="1dp" />
 
+            <ImageView
+                android:id="@+id/title_gradient"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:elevation="18dp"
+                android:src="@drawable/building_detail_title_gradient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
             <TextView
-                android:id="@+id/powderMillsTitle"
+                android:id="@+id/building_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/bebasneue_bold"
-                android:text="@string/building_list_title_text"
-                android:textAllCaps="true"
+                android:elevation="20dp"
+                android:fontFamily="@font/opensans_regular"
                 android:textColor="#FFFFFF"
-                android:textSize="25sp"
+                android:textSize="18sp"
+                tools:text="Incorporating Mill"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,35 +62,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:contentDescription="@string/back_button_cd_text"
+                android:elevation="20dp"
                 android:src="@drawable/ic_back_arrow_24"
-                app:layout_constraintBottom_toBottomOf="@id/powderMillsTitle"
+                app:layout_constraintBottom_toBottomOf="@id/building_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/powderMillsTitle"
-                android:elevation="20dp"
+                app:layout_constraintTop_toTopOf="@id/building_title"
                 app:tint="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/building_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:paddingStart="32dp"
-                android:paddingEnd="0dp"
-                android:textColor="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="@id/carouselView"
-                app:layout_constraintStart_toStartOf="parent"
-                android:elevation="20dp"
-                android:fontFamily="@font/opensans_regular"
-                android:letterSpacing="0.05"
-                android:textAllCaps="true"
-                tools:text="Incorporating Mill"
-                tools:textColor="@color/trivia_section_title_background" />
 
             <TextView
                 android:id="@+id/historyTitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/history_section_title_background"
+                android:elevation="20dp"
                 android:fontFamily="@font/opensans_semibold"
                 android:gravity="center"
                 android:paddingTop="8dp"
@@ -89,32 +84,26 @@
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:elevation="20dp"
                 app:layout_constraintTop_toBottomOf="@id/carouselView" />
 
             <ImageView
                 android:id="@+id/historyTitleSeparator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:elevation="20dp"
                 android:src="@drawable/ic_detail_title_separator"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/historyTitleText"
-                android:elevation="20dp"
-                app:tint="@color/history_section_title_background" />
+                app:tint="@color/history_section_title_background"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/historyDetailText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/historyTitleSeparator"
-                android:fontFamily="@font/opensans_regular"
-                android:lineSpacingExtra="2dp"
-                android:textSize="17sp"
+                style="@style/detail_text"
                 tools:text="The original gunpowder mills had 4 Incorporating Mills. This was increased to 12 Incorporating mills by the next owners, the British Board of Ordnance, and finally to 24 Incorporating Mills by the third owners, Tobin &amp; Horsfall." />
 
             <TextView
@@ -123,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/building_detail_section_vertical_margin"
                 android:background="@color/function_section_title_background"
+                android:elevation="20dp"
                 android:fontFamily="@font/opensans_semibold"
                 android:gravity="center"
                 android:paddingTop="8dp"
@@ -132,32 +122,26 @@
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:elevation="20dp"
                 app:layout_constraintTop_toBottomOf="@id/historyDetailText" />
 
             <ImageView
                 android:id="@+id/functionTitleSeparator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:elevation="20dp"
                 android:src="@drawable/ic_detail_title_separator"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/functionTitleText"
-                android:elevation="20dp"
-                app:tint="@color/function_section_title_background" />
+                app:tint="@color/function_section_title_background"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/functionDetailText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/functionTitleSeparator"
-                android:fontFamily="@font/opensans_regular"
-                android:lineSpacingExtra="2dp"
-                android:textSize="17sp"
+                style="@style/detail_text"
                 tools:text="The original gunpowder mills had 4 Incorporating Mills. This was increased to 12 Incorporating mills by the next owners, the British Board of Ordnance, and finally to 24 Incorporating Mills by the third owners, Tobin &amp; Horsfall." />
 
             <androidx.constraintlayout.widget.Group
@@ -172,6 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/building_detail_section_vertical_margin"
                 android:background="@color/trivia_section_title_background"
+                android:elevation="20dp"
                 android:fontFamily="@font/opensans_semibold"
                 android:gravity="center"
                 android:paddingTop="8dp"
@@ -181,32 +166,26 @@
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:elevation="20dp"
                 app:layout_constraintTop_toBottomOf="@id/functionDetailText" />
 
             <ImageView
                 android:id="@+id/triviaTitleSeparator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:elevation="20dp"
                 android:src="@drawable/ic_detail_title_separator"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/triviaTitleText"
-                android:elevation="20dp"
-                app:tint="@color/trivia_section_title_background" />
+                app:tint="@color/trivia_section_title_background"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/triviaDetailText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/triviaTitleSeparator"
-                android:fontFamily="@font/opensans_regular"
-                android:lineSpacingExtra="2dp"
-                android:textSize="17sp"
+                style="@style/detail_text"
                 tools:text="The original gunpowder mills had 4 Incorporating Mills. This was increased to 12 Incorporating mills by the next owners, the British Board of Ordnance, and finally to 24 Incorporating Mills by the third owners, Tobin &amp; Horsfall." />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
