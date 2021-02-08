@@ -114,6 +114,7 @@
                 app:layout_constraintTop_toBottomOf="@id/historyTitleSeparator"
                 android:fontFamily="@font/opensans_regular"
                 android:lineSpacingExtra="2dp"
+                android:textSize="17sp"
                 tools:text="The original gunpowder mills had 4 Incorporating Mills. This was increased to 12 Incorporating mills by the next owners, the British Board of Ordnance, and finally to 24 Incorporating Mills by the third owners, Tobin &amp; Horsfall." />
 
             <TextView
@@ -156,6 +157,7 @@
                 app:layout_constraintTop_toBottomOf="@id/functionTitleSeparator"
                 android:fontFamily="@font/opensans_regular"
                 android:lineSpacingExtra="2dp"
+                android:textSize="17sp"
                 tools:text="The original gunpowder mills had 4 Incorporating Mills. This was increased to 12 Incorporating mills by the next owners, the British Board of Ordnance, and finally to 24 Incorporating Mills by the third owners, Tobin &amp; Horsfall." />
 
             <androidx.constraintlayout.widget.Group
@@ -204,6 +206,7 @@
                 app:layout_constraintTop_toBottomOf="@id/triviaTitleSeparator"
                 android:fontFamily="@font/opensans_regular"
                 android:lineSpacingExtra="2dp"
+                android:textSize="17sp"
                 tools:text="The original gunpowder mills had 4 Incorporating Mills. This was increased to 12 Incorporating mills by the next owners, the British Board of Ordnance, and finally to 24 Incorporating Mills by the third owners, Tobin &amp; Horsfall." />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="18dp"
             android:backgroundTint="#3D5A66"
-            android:foreground="@drawable/building_list_icon"
+            android:foreground="@drawable/ic_togglelist"
             app:borderWidth="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
