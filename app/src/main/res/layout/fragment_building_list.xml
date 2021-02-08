@@ -22,7 +22,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="18dp"
             android:backgroundTint="#3D5A66"
-            android:foreground="@drawable/map_pin_icon"
+            android:foreground="@drawable/ic_togglemap"
             app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="@id/building_list_title"
             app:layout_constraintStart_toStartOf="parent"
