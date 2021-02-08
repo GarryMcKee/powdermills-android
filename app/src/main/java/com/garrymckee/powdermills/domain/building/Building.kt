@@ -9,5 +9,6 @@ data class Building(
     val function: String,
     val funFacts: List<String>,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val iconResId: Int
 )
