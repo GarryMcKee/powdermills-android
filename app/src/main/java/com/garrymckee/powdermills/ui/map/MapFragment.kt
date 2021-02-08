@@ -1,10 +1,15 @@
 package com.garrymckee.powdermills.ui.map
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -21,18 +26,18 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.plugins.annotation.OnSymbolClickListener
 import com.mapbox.mapboxsdk.plugins.annotation.Symbol
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions
-import com.mapbox.mapboxsdk.utils.BitmapUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 
 const val ICON_ID = "mapMarkerIconID"
 
 @AndroidEntryPoint
-class MapFragment : Fragment() {
+class MapFragment : Fragment(), OnSymbolClickListener {
 
     private lateinit var symbolManager: SymbolManager
     private lateinit var binding: FragmentMapBinding
@@ -41,7 +46,6 @@ class MapFragment : Fragment() {
     private lateinit var style: Style
     private val activityViewModel: MainViewModel by activityViewModels()
     private val viewModel: MapViewModel by viewModels()
-    private var symbol: Symbol? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,6 +80,17 @@ class MapFragment : Fragment() {
         return binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+        symbolManager.removeClickListener(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
     private fun checkLocationPermissions() {
         activityViewModel.locationPermission.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { locationPermissionGranted ->
@@ -93,6 +108,9 @@ class MapFragment : Fragment() {
         mapView.onSaveInstanceState(outState)
     }
 
+    /*
+    mapMarker click listenr fires twice, probably because it's set again on returning
+     */
     private fun setupMap(
         map: MapView,
         mapMarkers: List<SymbolOptions>
@@ -100,23 +118,21 @@ class MapFragment : Fragment() {
 
         map.getMapAsync { mapboxMap ->
             mapboxMap.setStyle(
-                Style.Builder()
-                    .fromUri(getString(R.string.mapbox_style_url))
+                Style.Builder().fromUri(getString(R.string.mapbox_style_url))
             ) { style ->
-                style.addImage(
-                    ICON_ID,
-                    BitmapUtils.getBitmapFromDrawable(resources.getDrawable(R.drawable.map_pin_icon))!!
-                )
+
+                viewModel.symbolOptionImages.forEach {
+                    style.addImage(
+                        it.iconId,
+                        getBitmapFromVectorDrawable(requireContext(), it.iconResId)!!, false
+                    )
+                }
 
                 val geoJsonOptions = GeoJsonOptions().withTolerance(0.4f)
                 symbolManager =
                     SymbolManager(map, mapboxMap, style, null, geoJsonOptions)
-                symbolManager.addClickListener { symbol ->
-                    val data = symbol.data
-                    requireNotNull(data)
-                    viewModel.handleMapMarkerSelected(data)
-                    false
-                }
+
+                symbolManager.addClickListener(this)
 
                 symbolManager.iconAllowOverlap = true
                 symbolManager.textAllowOverlap = true
@@ -148,5 +164,24 @@ class MapFragment : Fragment() {
 
         locationComponent.setCameraMode(CameraMode.TRACKING, 0, 15.0, null, null, null)
         locationComponent.renderMode = RenderMode.COMPASS
+    }
+
+    override fun onAnnotationClick(symbol: Symbol?): Boolean {
+        val data = symbol?.data
+        requireNotNull(data)
+        viewModel.handleMapMarkerSelected(data)
+        return true
+    }
+
+    private fun getBitmapFromVectorDrawable(context: Context, drawableId: Int): Bitmap? {
+        var drawable: Drawable? = ContextCompat.getDrawable(context, drawableId)
+        val bitmap: Bitmap = Bitmap.createBitmap(
+            drawable?.intrinsicWidth!!,
+            drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
     }
 }

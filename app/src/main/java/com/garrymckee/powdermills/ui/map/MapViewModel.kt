@@ -21,11 +21,14 @@ class MapViewModel @ViewModelInject constructor(private val buildingRepository: 
     val mapMarkersLiveData = MutableLiveData<List<SymbolOptions>>()
     val goToBuildingDetailScreenLiveData = MutableLiveData<Event<Long>>()
 
+    lateinit var symbolOptionImages: List<SymbolOptionImage>
+
     fun loadMapData() {
         viewModelScope.launch {
             buildingRepository.observeBuildings()
                 .collect { buildings ->
                     mapMarkersLiveData.value = buildings.map(::mapBuildingToMapMarker)
+                    symbolOptionImages = buildings.map(::mapBuildToSymbolOptionImage)
                 }
         }
     }
@@ -42,9 +45,17 @@ class MapViewModel @ViewModelInject constructor(private val buildingRepository: 
 
         return SymbolOptions()
             .withLatLng(LatLng(building.latitude, building.longitude))
-            .withIconImage(ICON_ID)
+            .withIconImage(building.appId.toString())
             .withIconSize(1.3f)
             .withData(buildingIdJsonData)
     }
 
+    private fun mapBuildToSymbolOptionImage(building: Building): SymbolOptionImage =
+        SymbolOptionImage(building.appId.toString(), building.iconResId)
+
 }
+
+data class SymbolOptionImage(
+    val iconId: String,
+    val iconResId: Int
+)
