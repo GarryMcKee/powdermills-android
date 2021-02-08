@@ -10,7 +10,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-const val SPLASH_ANIMATION_DELAY = 1000L
+const val SPLASH_ANIMATION_DELAY = 3000L
 
 class SplashScreenViewModel @ViewModelInject constructor(
     private val userAgreementRepository: UserAgreementRepository
