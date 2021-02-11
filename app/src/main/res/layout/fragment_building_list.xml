@@ -19,39 +19,39 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/show_building_list_button"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:backgroundTint="#3D5A66"
             android:foreground="@drawable/ic_togglemap"
+            android:layout_marginTop="18dp"
             app:borderWidth="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/building_list_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/building_list_title" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/building_list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/bebasneue_bold"
+            android:letterSpacing="0.09"
             android:text="@string/building_list_title_text"
             android:textAllCaps="true"
             android:textColor="#3D5A66"
-            android:textSize="30sp"
-            android:textStyle="bold"
+            android:textSize="40sp"
+            app:fontFamily="@font/bebasneue_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/show_building_list_button"
+            app:layout_constraintTop_toTopOf="@id/show_building_list_button" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/building_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/building_list_title"
+            app:layout_constraintTop_toBottomOf="@id/show_building_list_button"
             tools:listitem="@layout/building_list_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

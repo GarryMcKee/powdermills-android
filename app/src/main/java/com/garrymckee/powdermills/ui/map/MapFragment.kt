@@ -108,9 +108,6 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         mapView.onSaveInstanceState(outState)
     }
 
-    /*
-    mapMarker click listenr fires twice, probably because it's set again on returning
-     */
     private fun setupMap(
         map: MapView,
         mapMarkers: List<SymbolOptions>
@@ -124,7 +121,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
                 viewModel.symbolOptionImages.forEach {
                     style.addImage(
                         it.iconId,
-                        getBitmapFromVectorDrawable(requireContext(), it.iconResId)!!, false
+                        getBitmapFromVectorDrawable(requireContext(), it.iconResId)!!
                     )
                 }
 
@@ -138,7 +135,9 @@ class MapFragment : Fragment(), OnSymbolClickListener {
                 symbolManager.textAllowOverlap = true
 
                 symbolManager.create(mapMarkers)
-
+                mapboxMap.uiSettings.isAttributionEnabled = false
+                mapboxMap.uiSettings.isCompassEnabled = false
+                mapboxMap.uiSettings.isLogoEnabled = false
                 this.style = style
                 this.mapboxMap = mapboxMap
                 checkLocationPermissions()
@@ -170,7 +169,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         val data = symbol?.data
         requireNotNull(data)
         viewModel.handleMapMarkerSelected(data)
-        return true
+        return false
     }
 
     private fun getBitmapFromVectorDrawable(context: Context, drawableId: Int): Bitmap? {
