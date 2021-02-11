@@ -83,7 +83,6 @@ class MapFragment : Fragment(), OnSymbolClickListener {
     override fun onPause() {
         super.onPause()
         mapView.onPause()
-        symbolManager.removeClickListener(this)
     }
 
     override fun onDestroy() {
@@ -169,7 +168,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         val data = symbol?.data
         requireNotNull(data)
         viewModel.handleMapMarkerSelected(data)
-        return false
+        return true
     }
 
     private fun getBitmapFromVectorDrawable(context: Context, drawableId: Int): Bitmap? {
