@@ -1,0 +1,27 @@
+<svg height="15"
+    viewBox="0 0 15 15"
+    width="15"
+    xmlns="http://www.w3.org/2000/svg">
+    <g
+        data-name="Group 144"
+        id="Group_144"
+        transform="translate(-61 -407)">
+        <rect
+            data-name="Rectangle 29"
+            fill="#264653"
+            height="15"
+            id="Rectangle_29"
+            transform="translate(61 407)"
+            width="15" />
+        <path
+            d="M0,0V4.352H9.012"
+            data-name="Path 5"
+            fill="none"
+            id="Path_5"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            transform="translate(63.5 414.872) rotate(-45)" />
+    </g>
+</svg>
