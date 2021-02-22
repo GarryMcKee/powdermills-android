@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
 
-open class RemoteBuildingRepositoryImpl @Inject constructor(private val firestore: FirebaseFirestore) :
+class RemoteBuildingRepository @Inject constructor(private val firestore: FirebaseFirestore) :
     BuildingRepository {
 
     @ExperimentalCoroutinesApi
@@ -21,7 +21,6 @@ open class RemoteBuildingRepositoryImpl @Inject constructor(private val firestor
             .addOnSuccessListener { result ->
                 val buildingsResponse = result.toObjects(BuildingResponse::class.java)
                     .map(BuildingResponse::mapToDomainModel)
-
                 offer(buildingsResponse)
             }
 
@@ -37,11 +36,10 @@ open class RemoteBuildingRepositoryImpl @Inject constructor(private val firestor
             .whereEqualTo(BUILDING_ID_ITEM_KEY, id)
             .get()
             .addOnSuccessListener { results ->
-                val building = results.toObjects(BuildingResponse::class.java)
+                results.toObjects(BuildingResponse::class.java)
                     .map(BuildingResponse::mapToDomainModel)
                     .first()
-
-                offer(building)
+                    .let { offer(it) }
             }
 
         awaitClose {

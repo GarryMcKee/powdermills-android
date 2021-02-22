@@ -19,6 +19,8 @@ import com.garrymckee.powdermills.MainViewModel
 import com.garrymckee.powdermills.R
 import com.garrymckee.powdermills.databinding.FragmentMapBinding
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
 import com.mapbox.mapboxsdk.location.LocationComponentOptions
 import com.mapbox.mapboxsdk.location.modes.CameraMode
@@ -94,7 +96,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         activityViewModel.locationPermission.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { locationPermissionGranted ->
                 if (locationPermissionGranted) {
-                    centreMapOnUser()
+//                    centreMapOnUser()
                 }
             }
         })
@@ -113,6 +115,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
     ) {
 
         map.getMapAsync { mapboxMap ->
+
             mapboxMap.setStyle(
                 Style.Builder().fromUri(getString(R.string.mapbox_style_url))
             ) { style ->
@@ -123,6 +126,19 @@ class MapFragment : Fragment(), OnSymbolClickListener {
                         getBitmapFromVectorDrawable(requireContext(), it.iconResId)!!
                     )
                 }
+
+                viewModel.getCameraPosition()
+                    .run {
+                        CameraPosition
+                            .Builder()
+                            .bearing(bearing)
+                            .zoom(zoom)
+                            .tilt(1.0)
+                            .target(LatLng(latitude, longitude))
+                            .build()
+                    }.let {
+                        mapboxMap.cameraPosition = it
+                    }
 
                 val geoJsonOptions = GeoJsonOptions().withTolerance(0.4f)
                 symbolManager =
