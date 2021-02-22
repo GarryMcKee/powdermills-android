@@ -14,7 +14,10 @@ import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MapViewModel @ViewModelInject constructor(private val buildingRepository: BuildingRepository) :
+class MapViewModel @ViewModelInject constructor(
+    private val buildingRepository: BuildingRepository,
+    private val mapRepository: MapRepository
+) :
     ViewModel() {
 
     private val buildingIdJsonField = "buildingId"
@@ -37,6 +40,8 @@ class MapViewModel @ViewModelInject constructor(private val buildingRepository: 
         val buildingId = mapMarkerData.asJsonObject.get(buildingIdJsonField).asLong
         goToBuildingDetailScreenLiveData.value = Event(buildingId)
     }
+
+    fun getCameraPosition() = mapRepository.getCameraPosition()
 
     private fun mapBuildingToMapMarker(building: Building): SymbolOptions {
         val buildingIdJsonData = JsonObject().apply {
