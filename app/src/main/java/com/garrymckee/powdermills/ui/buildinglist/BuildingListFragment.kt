@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.garrymckee.powdermills.databinding.FragmentBuildingListBinding
 import com.garrymckee.powdermills.domain.building.Building
+import com.garrymckee.powdermills.ui.util.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,7 +46,7 @@ class BuildingListFragment : Fragment() {
 
     private fun subscribeClickListeners() {
         binding.showBuildingListButton
-            .setOnClickListener {
+            .setOnSingleClickListener {
                 findNavController()
                     .popBackStack()
             }

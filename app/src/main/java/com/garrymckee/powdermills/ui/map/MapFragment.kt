@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.garrymckee.powdermills.MainViewModel
 import com.garrymckee.powdermills.R
 import com.garrymckee.powdermills.databinding.FragmentMapBinding
+import com.garrymckee.powdermills.ui.util.setOnSingleClickListener
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -69,7 +70,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
             }
         })
 
-        binding.showBuildingListButton.setOnClickListener {
+        binding.showBuildingListButton.setOnSingleClickListener {
             findNavController().navigate(MapFragmentDirections.actionMapFragmentToBuildingListFragment())
         }
 
@@ -96,7 +97,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         activityViewModel.locationPermission.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { locationPermissionGranted ->
                 if (locationPermissionGranted) {
-//                    centreMapOnUser()
+                    setUpUserLocation()
                 }
             }
         })
@@ -120,39 +121,10 @@ class MapFragment : Fragment(), OnSymbolClickListener {
                 Style.Builder().fromUri(getString(R.string.mapbox_style_url))
             ) { style ->
 
-                viewModel.symbolOptionImages.forEach {
-                    style.addImage(
-                        it.iconId,
-                        getBitmapFromVectorDrawable(requireContext(), it.iconResId)!!
-                    )
-                }
+                setCameraPosition(mapboxMap)
+                setUpMapPins(map, mapboxMap, style, mapMarkers)
+                setupAttributionFeatures(mapboxMap)
 
-                viewModel.getCameraPosition()
-                    .run {
-                        CameraPosition
-                            .Builder()
-                            .bearing(bearing)
-                            .zoom(zoom)
-                            .tilt(1.0)
-                            .target(LatLng(latitude, longitude))
-                            .build()
-                    }.let {
-                        mapboxMap.cameraPosition = it
-                    }
-
-                val geoJsonOptions = GeoJsonOptions().withTolerance(0.4f)
-                symbolManager =
-                    SymbolManager(map, mapboxMap, style, null, geoJsonOptions)
-
-                symbolManager.addClickListener(this)
-
-                symbolManager.iconAllowOverlap = true
-                symbolManager.textAllowOverlap = true
-
-                symbolManager.create(mapMarkers)
-                mapboxMap.uiSettings.isAttributionEnabled = false
-                mapboxMap.uiSettings.isCompassEnabled = false
-                mapboxMap.uiSettings.isLogoEnabled = false
                 this.style = style
                 this.mapboxMap = mapboxMap
                 checkLocationPermissions()
@@ -160,8 +132,53 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         }
     }
 
+    private fun setupAttributionFeatures(mapboxMap: MapboxMap) {
+        mapboxMap.uiSettings.isAttributionEnabled = false
+        mapboxMap.uiSettings.isCompassEnabled = false
+        mapboxMap.uiSettings.isLogoEnabled = false
+    }
+
+    private fun setUpMapPins(
+        map: MapView,
+        mapboxMap: MapboxMap,
+        style: Style,
+        mapMarkers: List<SymbolOptions>
+    ) {
+        viewModel.symbolOptionImages.forEach {
+            style.addImage(
+                it.iconId,
+                getBitmapFromVectorDrawable(requireContext(), it.iconResId)!!
+            )
+        }
+
+        val geoJsonOptions = GeoJsonOptions().withTolerance(0.4f)
+        symbolManager =
+            SymbolManager(map, mapboxMap, style, null, geoJsonOptions)
+
+        symbolManager.addClickListener(this)
+
+        symbolManager.iconAllowOverlap = true
+        symbolManager.textAllowOverlap = true
+        symbolManager.create(mapMarkers)
+    }
+
+    private fun setCameraPosition(mapboxMap: MapboxMap) {
+        viewModel.getCameraPosition()
+            .run {
+                CameraPosition
+                    .Builder()
+                    .bearing(bearing)
+                    .zoom(zoom)
+                    .tilt(1.0)
+                    .target(LatLng(latitude, longitude))
+                    .build()
+            }.let {
+                mapboxMap.cameraPosition = it
+            }
+    }
+
     @SuppressLint("MissingPermission")
-    private fun centreMapOnUser() {
+    private fun setUpUserLocation() {
         val locationComponentOptions = LocationComponentOptions.builder(requireContext())
             .foregroundDrawable(R.drawable.mapbox_marker_icon_default)
             .bearingTintColor(R.color.vpi__bright_foreground_inverse_holo_light)
@@ -176,7 +193,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         locationComponent.activateLocationComponent(locationComponentActivationOptions)
         locationComponent.isLocationComponentEnabled = true
 
-        locationComponent.setCameraMode(CameraMode.TRACKING, 0, 15.0, null, null, null)
+        locationComponent.setCameraMode(CameraMode.NONE, 0, 15.0, null, null, null)
         locationComponent.renderMode = RenderMode.COMPASS
     }
 
@@ -188,7 +205,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
     }
 
     private fun getBitmapFromVectorDrawable(context: Context, drawableId: Int): Bitmap? {
-        var drawable: Drawable? = ContextCompat.getDrawable(context, drawableId)
+        val drawable: Drawable? = ContextCompat.getDrawable(context, drawableId)
         val bitmap: Bitmap = Bitmap.createBitmap(
             drawable?.intrinsicWidth!!,
             drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
