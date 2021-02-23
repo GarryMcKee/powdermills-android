@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.garrymckee.powdermills.domain.building.Building
 import com.garrymckee.powdermills.domain.building.BuildingRepository
-import com.garrymckee.powdermills.ui.Event
+import com.garrymckee.powdermills.ui.util.Event
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.mapbox.mapboxsdk.geometry.LatLng

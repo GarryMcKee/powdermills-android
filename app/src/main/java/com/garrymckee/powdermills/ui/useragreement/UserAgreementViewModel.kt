@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.garrymckee.powdermills.domain.useragreement.UserAgreement
 import com.garrymckee.powdermills.domain.useragreement.UserAgreementRepository
-import com.garrymckee.powdermills.ui.Event
+import com.garrymckee.powdermills.ui.util.Event
 import kotlinx.coroutines.launch
 
 class UserAgreementViewModel @ViewModelInject constructor(
