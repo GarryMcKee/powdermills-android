@@ -19,6 +19,7 @@ import com.garrymckee.powdermills.MainViewModel
 import com.garrymckee.powdermills.R
 import com.garrymckee.powdermills.databinding.FragmentMapBinding
 import com.garrymckee.powdermills.ui.util.setOnSingleClickListener
+import com.google.android.material.snackbar.Snackbar
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -91,6 +92,16 @@ class MapFragment : Fragment(), OnSymbolClickListener {
     override fun onDestroy() {
         super.onDestroy()
         mapView.onDestroy()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
     }
 
     private fun checkLocationPermissions() {
@@ -179,24 +190,32 @@ class MapFragment : Fragment(), OnSymbolClickListener {
 
     @SuppressLint("MissingPermission")
     private fun setUpUserLocation() {
-        val locationComponentOptions = LocationComponentOptions.builder(requireContext())
-            .foregroundDrawable(R.drawable.mapbox_marker_icon_default)
-            .bearingTintColor(R.color.vpi__bright_foreground_inverse_holo_light)
-            .build()
+        try {
+            val locationComponentOptions = LocationComponentOptions.builder(requireContext())
+                .foregroundDrawable(R.drawable.mapbox_marker_icon_default)
+                .bearingTintColor(R.color.vpi__bright_foreground_inverse_holo_light)
+                .build()
 
-        val locationComponentActivationOptions = LocationComponentActivationOptions
-            .builder(requireContext(), style)
-            .locationComponentOptions(locationComponentOptions)
-            .build()
+            val locationComponentActivationOptions = LocationComponentActivationOptions
+                .builder(requireContext(), style)
+                .locationComponentOptions(locationComponentOptions)
+                .build()
 
-        val locationComponent = mapboxMap.locationComponent
-        locationComponent.activateLocationComponent(locationComponentActivationOptions)
-        locationComponent.isLocationComponentEnabled = true
+            val locationComponent = mapboxMap.locationComponent
+            locationComponent.activateLocationComponent(locationComponentActivationOptions)
+            locationComponent.isLocationComponentEnabled = true
 
-        locationComponent.setCameraMode(CameraMode.NONE, 0, 15.0, null, null, null)
-        locationComponent.renderMode = RenderMode.COMPASS
+            locationComponent.setCameraMode(CameraMode.NONE, 0, 15.0, null, null, null)
+            locationComponent.renderMode = RenderMode.COMPASS
+        } catch (e: Exception) {
+            Snackbar.make(
+                requireView(),
+                "Could not get your current location, please make sure location is turned on for your device",
+                Snackbar.LENGTH_SHORT
+            )
+        }
+
     }
-
     override fun onAnnotationClick(symbol: Symbol?): Boolean {
         val data = symbol?.data
         requireNotNull(data)
