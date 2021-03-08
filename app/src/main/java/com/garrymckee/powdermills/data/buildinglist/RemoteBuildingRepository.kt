@@ -2,6 +2,7 @@ package com.garrymckee.powdermills.data.buildinglist
 
 import android.util.Log
 import com.garrymckee.powdermills.R
+import com.garrymckee.powdermills.data.offerSafe
 import com.garrymckee.powdermills.domain.building.Building
 import com.garrymckee.powdermills.domain.building.BuildingRepository
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,7 +22,7 @@ class RemoteBuildingRepository @Inject constructor(private val firestore: Fireba
             .addOnSuccessListener { result ->
                 val buildingsResponse = result.toObjects(BuildingResponse::class.java)
                     .map(BuildingResponse::mapToDomainModel)
-                offer(buildingsResponse)
+                offerSafe(buildingsResponse)
             }
 
         awaitClose {
@@ -39,7 +40,7 @@ class RemoteBuildingRepository @Inject constructor(private val firestore: Fireba
                 results.toObjects(BuildingResponse::class.java)
                     .map(BuildingResponse::mapToDomainModel)
                     .first()
-                    .let { offer(it) }
+                    .let { offerSafe(it) }
             }
 
         awaitClose {

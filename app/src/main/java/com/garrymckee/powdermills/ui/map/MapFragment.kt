@@ -125,7 +125,6 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         map: MapView,
         mapMarkers: List<SymbolOptions>
     ) {
-
         map.getMapAsync { mapboxMap ->
 
             mapboxMap.setStyle(
@@ -192,7 +191,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
     private fun setUpUserLocation() {
         try {
             val locationComponentOptions = LocationComponentOptions.builder(requireContext())
-                .foregroundDrawable(R.drawable.mapbox_marker_icon_default)
+                .foregroundDrawable(R.drawable.ic_you_are_here)
                 .bearingTintColor(R.color.vpi__bright_foreground_inverse_holo_light)
                 .build()
 
