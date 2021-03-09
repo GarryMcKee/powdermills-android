@@ -21,8 +21,6 @@ import com.garrymckee.powdermills.databinding.FragmentMapBinding
 import com.garrymckee.powdermills.ui.util.setOnSingleClickListener
 import com.google.android.material.snackbar.Snackbar
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
 import com.mapbox.mapboxsdk.location.LocationComponentOptions
 import com.mapbox.mapboxsdk.location.modes.CameraMode
@@ -36,6 +34,7 @@ import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 const val ICON_ID = "mapMarkerIconID"
@@ -61,6 +60,15 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         mapView = binding.mapView
         mapView.onCreate(savedInstanceState)
 
+        setupBindings()
+        setupSubscriptions()
+
+        viewModel.loadMapData()
+
+        return binding.root
+    }
+
+    private fun setupSubscriptions() {
         viewModel.goToBuildingDetailScreenLiveData.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { buildingId ->
                 findNavController().navigate(
@@ -71,21 +79,39 @@ class MapFragment : Fragment(), OnSymbolClickListener {
             }
         })
 
-        binding.showBuildingListButton.setOnSingleClickListener {
-            findNavController().navigate(MapFragmentDirections.actionMapFragmentToBuildingListFragment())
-        }
-
         viewModel.mapMarkersLiveData.observe(viewLifecycleOwner, Observer { mapMarkers ->
             setupMap(mapView, mapMarkers)
         })
+    }
 
-        viewModel.loadMapData()
+    private fun onMapLoadedSubscriptions() {
+        viewModel.cameraPositionLiveData.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { cameraPosition ->
+                mapboxMap.cameraPosition = cameraPosition
+                Timber.d(cameraPosition.toString())
+            }
+        })
+    }
 
-        return binding.root
+    private fun setupBindings() {
+        binding.showBuildingListButton.setOnSingleClickListener {
+            findNavController().navigate(MapFragmentDirections.actionMapFragmentToBuildingListFragment())
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
     }
 
     override fun onPause() {
         super.onPause()
+        viewModel.saveCameraPosition(mapboxMap.cameraPosition)
         mapView.onPause()
     }
 
@@ -131,13 +157,14 @@ class MapFragment : Fragment(), OnSymbolClickListener {
                 Style.Builder().fromUri(getString(R.string.mapbox_style_url))
             ) { style ->
 
-                setCameraPosition(mapboxMap)
+                viewModel.getCameraPosition()
                 setUpMapPins(map, mapboxMap, style, mapMarkers)
                 setupAttributionFeatures(mapboxMap)
 
                 this.style = style
                 this.mapboxMap = mapboxMap
                 checkLocationPermissions()
+                onMapLoadedSubscriptions()
             }
         }
     }
@@ -172,21 +199,6 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         symbolManager.create(mapMarkers)
     }
 
-    private fun setCameraPosition(mapboxMap: MapboxMap) {
-        viewModel.getCameraPosition()
-            .run {
-                CameraPosition
-                    .Builder()
-                    .bearing(bearing)
-                    .zoom(zoom)
-                    .tilt(1.0)
-                    .target(LatLng(latitude, longitude))
-                    .build()
-            }.let {
-                mapboxMap.cameraPosition = it
-            }
-    }
-
     @SuppressLint("MissingPermission")
     private fun setUpUserLocation() {
         try {
@@ -215,6 +227,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         }
 
     }
+
     override fun onAnnotationClick(symbol: Symbol?): Boolean {
         val data = symbol?.data
         requireNotNull(data)

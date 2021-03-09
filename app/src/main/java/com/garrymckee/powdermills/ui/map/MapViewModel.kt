@@ -6,9 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.garrymckee.powdermills.domain.building.Building
 import com.garrymckee.powdermills.domain.building.BuildingRepository
+import com.garrymckee.powdermills.domain.map.MapRepository
+import com.garrymckee.powdermills.domain.map.mapToDomainModel
 import com.garrymckee.powdermills.ui.util.Event
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 import kotlinx.coroutines.flow.collect
@@ -23,6 +26,7 @@ class MapViewModel @ViewModelInject constructor(
     private val buildingIdJsonField = "buildingId"
     val mapMarkersLiveData = MutableLiveData<List<SymbolOptions>>()
     val goToBuildingDetailScreenLiveData = MutableLiveData<Event<Long>>()
+    val cameraPositionLiveData = MutableLiveData<Event<CameraPosition>>()
 
     lateinit var symbolOptionImages: List<SymbolOptionImage>
 
@@ -41,7 +45,22 @@ class MapViewModel @ViewModelInject constructor(
         goToBuildingDetailScreenLiveData.value = Event(buildingId)
     }
 
-    fun getCameraPosition() = mapRepository.getCameraPosition()
+    fun getCameraPosition() {
+        viewModelScope.launch {
+            mapRepository.getCameraPosition().collect {
+                CameraPosition
+                    .Builder()
+                    .bearing(it.bearing)
+                    .zoom(it.zoom)
+                    .tilt(1.0)
+                    .target(LatLng(it.latitude, it.longitude))
+                    .build()
+                    .let { cameraPosition ->
+                        cameraPositionLiveData.value = Event(cameraPosition)
+                    }
+            }
+        }
+    }
 
     private fun mapBuildingToMapMarker(building: Building): SymbolOptions {
         val buildingIdJsonData = JsonObject().apply {
@@ -57,6 +76,12 @@ class MapViewModel @ViewModelInject constructor(
 
     private fun mapBuildToSymbolOptionImage(building: Building): SymbolOptionImage =
         SymbolOptionImage(building.appId.toString(), building.iconResId)
+
+    fun saveCameraPosition(cameraPosition: CameraPosition) {
+        viewModelScope.launch {
+            mapRepository.saveCameraPosition(cameraPosition.mapToDomainModel())
+        }
+    }
 
 }
 
