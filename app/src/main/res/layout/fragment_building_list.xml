@@ -36,7 +36,7 @@
             android:text="@string/building_list_title_text"
             android:textAllCaps="true"
             android:textColor="#3D5A66"
-            android:textSize="40sp"
+            android:textSize="@dimen/app_title_text_size"
             app:fontFamily="@font/bebasneue_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

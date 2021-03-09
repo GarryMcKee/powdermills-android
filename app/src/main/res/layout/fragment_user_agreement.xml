@@ -35,7 +35,7 @@
                 android:letterSpacing="0.05"
                 android:text="@string/terms_and_conditions_title"
                 android:textColor="@color/titleTextColor"
-                android:textSize="20sp"
+                android:textSize="@dimen/tc_title_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -69,6 +69,7 @@
                     android:lineSpacingExtra="2sp"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
+                    android:textSize="@dimen/tc_text_size"
                     android:text="@string/terms_and_conditions_html" />
             </androidx.core.widget.NestedScrollView>
 
@@ -87,6 +88,7 @@
                 android:textAlignment="textEnd"
                 android:textColor="@color/checkboxTextColor"
                 android:textStyle="normal"
+                android:textSize="@dimen/tc_agreement_text_size"
                 app:layout_constraintBottom_toTopOf="@id/continueButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
