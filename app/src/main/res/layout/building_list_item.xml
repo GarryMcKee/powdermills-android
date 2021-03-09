@@ -38,7 +38,7 @@
             android:elevation="12dp"
             app:fontFamily="@font/opensans_regular"
             android:textColor="@color/buildingItemNameColor"
-            android:textSize="16sp"
+            android:textSize="@dimen/building_list_item_label_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Building One" />

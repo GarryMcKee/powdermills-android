@@ -27,8 +27,10 @@
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:mapbox_renderTextureMode="true" />
 
         <TextView
@@ -39,7 +41,7 @@
             android:letterSpacing="0.09"
             android:text="@string/building_list_title_text"
             android:textColor="@color/map_title_color"
-            android:textSize="40sp"
+            android:textSize="@dimen/app_title_text_size"
             app:fontFamily="@font/bebasneue_bold"
             app:layout_constraintBottom_toBottomOf="@+id/show_building_list_button"
             app:layout_constraintEnd_toEndOf="parent"

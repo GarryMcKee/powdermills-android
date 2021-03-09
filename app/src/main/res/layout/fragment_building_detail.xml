@@ -50,7 +50,7 @@
                 android:elevation="20dp"
                 app:fontFamily="@font/opensans_regular"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="@dimen/building_detail_title_text_size"
                 tools:text="Incorporating Mill"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +81,7 @@
                 android:paddingBottom="8dp"
                 android:text="@string/history_section_title_text"
                 android:textColor="@color/detail_section_title_color"
-                android:textSize="28sp"
+                android:textSize="@dimen/building_detail_section_title_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/carouselView" />
@@ -119,7 +119,7 @@
                 android:paddingBottom="8dp"
                 android:text="@string/function_section_title"
                 android:textColor="@color/detail_section_title_color"
-                android:textSize="28sp"
+                android:textSize="@dimen/building_detail_section_title_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/historyDetailText" />
@@ -163,7 +163,7 @@
                 android:paddingBottom="8dp"
                 android:text="@string/trivia_section_title"
                 android:textColor="@color/detail_section_title_color"
-                android:textSize="28sp"
+                android:textSize="@dimen/building_detail_section_title_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/functionDetailText" />
