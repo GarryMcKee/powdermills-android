@@ -4,8 +4,8 @@ import com.garrymckee.powdermills.data.buildinglist.RemoteBuildingRepository
 import com.garrymckee.powdermills.data.map.MapRepositoryImpl
 import com.garrymckee.powdermills.data.useragreement.UserAgreementRepositoryImpl
 import com.garrymckee.powdermills.domain.building.BuildingRepository
+import com.garrymckee.powdermills.domain.map.MapRepository
 import com.garrymckee.powdermills.domain.useragreement.UserAgreementRepository
-import com.garrymckee.powdermills.ui.map.MapRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

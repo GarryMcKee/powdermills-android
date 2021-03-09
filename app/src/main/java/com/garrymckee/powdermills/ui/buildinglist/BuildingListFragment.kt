@@ -31,7 +31,7 @@ class BuildingListFragment : Fragment() {
         binding.lifecycleOwner = this
         subscribeClickListeners()
         subscribeToBuildingList(buildingListAdapter)
-        viewModel.observeBuildings()
+        viewModel.getBuildings()
         return binding.root
     }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.garrymckee.powdermills.domain.building.Building
 import com.garrymckee.powdermills.domain.building.BuildingRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -14,7 +15,7 @@ class BuildingListViewModel @ViewModelInject constructor(
 ) : ViewModel() {
     val buildingList = MutableLiveData<List<Building>>()
 
-    fun observeBuildings() =
+    fun getBuildings(): Job =
         viewModelScope.launch {
             buildingRepository.observeBuildings()
                 .collect { buildings ->

@@ -1,7 +1,9 @@
-package com.garrymckee.powdermills.ui.map
+package com.garrymckee.powdermills.domain.map
 
-import com.garrymckee.powdermills.domain.map.CameraPosition
+import kotlinx.coroutines.flow.Flow
 
 interface MapRepository {
-    fun getCameraPosition(): CameraPosition
+    fun getCameraPosition(): Flow<CameraPosition>
+    suspend fun saveCameraPosition(cameraPosition: CameraPosition)
+    suspend fun resetCameraPosition()
 }
