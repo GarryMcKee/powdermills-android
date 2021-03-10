@@ -42,11 +42,19 @@ class MapFragment : Fragment(), OnSymbolClickListener {
 
     private lateinit var symbolManager: SymbolManager
     private lateinit var binding: FragmentMapBinding
-    private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
     private lateinit var style: Style
     private val activityViewModel: MainViewModel by activityViewModels()
     private val viewModel: MapViewModel by viewModels()
+
+    /*
+    Mapbox requires a call to mapView.onSaveInstanceState to tie in with app lifecycle methods
+    However, onSaveInstanceState can in fact be called before onCreateView meaning intermittently
+    we can end up with uninitialised propety except when using late init for map view.
+
+    Work around for this is set a nullable map view and appropriate safe calls
+     */
+    private var mapView: MapView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +64,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         Mapbox.getInstance(this.requireContext(), getString(R.string.mapbox_access_token))
         binding = FragmentMapBinding.inflate(inflater)
         mapView = binding.mapView
-        mapView.onCreate(savedInstanceState)
+        mapView?.onCreate(savedInstanceState)
 
         setupBindings()
         setupSubscriptions()
@@ -78,7 +86,9 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         })
 
         viewModel.mapMarkersLiveData.observe(viewLifecycleOwner, Observer { mapMarkers ->
-            setupMap(mapView, mapMarkers)
+            mapView?.let {
+                setupMap(it, mapMarkers)
+            }
         })
     }
 
@@ -99,33 +109,33 @@ class MapFragment : Fragment(), OnSymbolClickListener {
 
     override fun onResume() {
         super.onResume()
-        mapView.onResume()
+        mapView?.onResume()
     }
 
     override fun onStart() {
         super.onStart()
-        mapView.onStart()
+        mapView?.onStart()
     }
 
     override fun onPause() {
         super.onPause()
         viewModel.saveCameraPosition(mapboxMap.cameraPosition)
-        mapView.onPause()
+        mapView?.onPause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mapView.onDestroy()
+        mapView?.onDestroy()
     }
 
     override fun onStop() {
         super.onStop()
-        mapView.onStop()
+        mapView?.onStop()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapView.onLowMemory()
+        mapView?.onLowMemory()
     }
 
     private fun checkLocationPermissions() {
@@ -140,9 +150,10 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         activityViewModel.checkLocationPermissions()
     }
 
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
+        mapView?.onSaveInstanceState(outState)
     }
 
     private fun setupMap(
