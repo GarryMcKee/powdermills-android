@@ -37,9 +37,6 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
-
-const val ICON_ID = "mapMarkerIconID"
-
 @AndroidEntryPoint
 class MapFragment : Fragment(), OnSymbolClickListener {
 
