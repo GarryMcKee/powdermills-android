@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.garrymckee.powdermills.BuildConfig
 import com.garrymckee.powdermills.databinding.FragmentBuildingListBinding
 import com.garrymckee.powdermills.domain.building.Building
 import com.garrymckee.powdermills.ui.util.setOnSingleClickListener
@@ -26,13 +28,19 @@ class BuildingListFragment : Fragment() {
         binding = FragmentBuildingListBinding.inflate(inflater, container, false)
 
         val buildingListAdapter = BuildingListAdapter()
-        binding.buildingList.layoutManager = LinearLayoutManager(context)
-        binding.buildingList.adapter = buildingListAdapter
-        binding.lifecycleOwner = this
+
+        setupBuildingListAdapter(buildingListAdapter)
         subscribeClickListeners()
         subscribeToBuildingList(buildingListAdapter)
         viewModel.getBuildings()
+        
         return binding.root
+    }
+
+    private fun setupBuildingListAdapter(buildingListAdapter: BuildingListAdapter) {
+        binding.buildingList.layoutManager = LinearLayoutManager(context)
+        binding.buildingList.adapter = buildingListAdapter
+        binding.lifecycleOwner = this
     }
 
     private fun subscribeToBuildingList(adapter: BuildingListAdapter) {
@@ -49,6 +57,15 @@ class BuildingListFragment : Fragment() {
             .setOnSingleClickListener {
                 findNavController()
                     .popBackStack()
+            }
+
+        binding.buildingListTitle
+            .setOnClickListener {
+                Toast.makeText(
+                    requireContext(),
+                    "App Version: ${BuildConfig.VERSION_NAME}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 }
