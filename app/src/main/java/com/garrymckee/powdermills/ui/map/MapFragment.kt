@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -204,6 +205,9 @@ class MapFragment : Fragment(), OnSymbolClickListener {
         try {
             val locationComponentOptions = LocationComponentOptions.builder(requireContext())
                 .foregroundDrawable(R.drawable.ic_you_are_here)
+                .pulseEnabled(true)
+                .pulseColor(Color.WHITE)
+                .pulseAlpha(.4f)
                 .bearingTintColor(R.color.vpi__bright_foreground_inverse_holo_light)
                 .build()
 
