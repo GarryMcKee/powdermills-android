@@ -42,7 +42,6 @@ class MapFragment : Fragment(), OnSymbolClickListener {
 
     private lateinit var symbolManager: SymbolManager
     private lateinit var binding: FragmentMapBinding
-    private lateinit var mapboxMap: MapboxMap
     private lateinit var style: Style
     private val activityViewModel: MainViewModel by activityViewModels()
     private val viewModel: MapViewModel by viewModels()
@@ -54,6 +53,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
 
     Work around for this is set a nullable map view and appropriate safe calls
      */
+    private var mapboxMap: MapboxMap? = null
     private var mapView: MapView? = null
 
     override fun onCreateView(
@@ -95,7 +95,7 @@ class MapFragment : Fragment(), OnSymbolClickListener {
     private fun onMapLoadedSubscriptions() {
         viewModel.cameraPositionLiveData.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { cameraPosition ->
-                mapboxMap.cameraPosition = cameraPosition
+                mapboxMap?.cameraPosition = cameraPosition
                 Timber.d(cameraPosition.toString())
             }
         })
@@ -119,7 +119,9 @@ class MapFragment : Fragment(), OnSymbolClickListener {
 
     override fun onPause() {
         super.onPause()
-        viewModel.saveCameraPosition(mapboxMap.cameraPosition)
+        mapboxMap?.let {
+            viewModel.saveCameraPosition(it.cameraPosition)
+        }
         mapView?.onPause()
     }
 
@@ -211,25 +213,28 @@ class MapFragment : Fragment(), OnSymbolClickListener {
     @SuppressLint("MissingPermission")
     private fun setUpUserLocation() {
         try {
-            val locationComponentOptions = LocationComponentOptions.builder(requireContext())
-                .foregroundDrawable(R.drawable.ic_you_are_here)
-                .pulseEnabled(true)
-                .pulseColor(Color.WHITE)
-                .pulseAlpha(.4f)
-                .bearingTintColor(R.color.vpi__bright_foreground_inverse_holo_light)
-                .build()
+            mapboxMap?.let {
+                val locationComponentOptions = LocationComponentOptions.builder(requireContext())
+                    .foregroundDrawable(R.drawable.ic_you_are_here)
+                    .pulseEnabled(true)
+                    .pulseColor(Color.WHITE)
+                    .pulseAlpha(.4f)
+                    .bearingTintColor(R.color.vpi__bright_foreground_inverse_holo_light)
+                    .build()
 
-            val locationComponentActivationOptions = LocationComponentActivationOptions
-                .builder(requireContext(), style)
-                .locationComponentOptions(locationComponentOptions)
-                .build()
+                val locationComponentActivationOptions = LocationComponentActivationOptions
+                    .builder(requireContext(), style)
+                    .locationComponentOptions(locationComponentOptions)
+                    .build()
 
-            val locationComponent = mapboxMap.locationComponent
-            locationComponent.activateLocationComponent(locationComponentActivationOptions)
-            locationComponent.isLocationComponentEnabled = true
+                val locationComponent = it.locationComponent
+                locationComponent.activateLocationComponent(locationComponentActivationOptions)
+                locationComponent.isLocationComponentEnabled = true
 
-            locationComponent.setCameraMode(CameraMode.NONE, 0, 15.0, null, null, null)
-            locationComponent.renderMode = RenderMode.COMPASS
+                locationComponent.setCameraMode(CameraMode.NONE, 0, 15.0, null, null, null)
+                locationComponent.renderMode = RenderMode.COMPASS
+            }
+
         } catch (e: Exception) {
             Snackbar.make(
                 requireView(),
