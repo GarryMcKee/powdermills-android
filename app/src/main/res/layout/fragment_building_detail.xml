@@ -15,6 +15,20 @@
             android:background="@color/background_color"
             android:paddingBottom="16dp">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/title_start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="68dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/title_end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="68dp" />
+
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/carouselView"
                 android:layout_width="match_parent"
@@ -44,17 +58,18 @@
 
             <TextView
                 android:id="@+id/building_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:elevation="20dp"
-                app:fontFamily="@font/opensans_regular"
+                android:gravity="center"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/building_detail_title_text_size"
-                tools:text="Incorporating Mill"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:fontFamily="@font/opensans_regular"
+                app:layout_constraintEnd_toStartOf="@id/title_end_guideline"
+                app:layout_constraintStart_toEndOf="@id/title_start_guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Incorporating Mill and Some More Stuff" />
 
             <ImageView
                 android:id="@+id/backButton"
@@ -75,13 +90,13 @@
                 android:layout_height="wrap_content"
                 android:background="@color/history_section_title_background"
                 android:elevation="20dp"
-                app:fontFamily="@font/opensans_semibold"
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="@string/history_section_title_text"
                 android:textColor="@color/detail_section_title_color"
                 android:textSize="@dimen/building_detail_section_title_text_size"
+                app:fontFamily="@font/opensans_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/carouselView" />
@@ -100,10 +115,10 @@
 
             <TextView
                 android:id="@+id/historyDetailText"
+                style="@style/detail_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/historyTitleSeparator"
-                style="@style/detail_text"
                 tools:text="The original gunpowder mills had 4 Incorporating Mills. This was increased to 12 Incorporating mills by the next owners, the British Board of Ordnance, and finally to 24 Incorporating Mills by the third owners, Tobin &amp; Horsfall." />
 
             <TextView
@@ -113,13 +128,13 @@
                 android:layout_marginTop="@dimen/building_detail_section_vertical_margin"
                 android:background="@color/function_section_title_background"
                 android:elevation="20dp"
-                app:fontFamily="@font/opensans_semibold"
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="@string/function_section_title"
                 android:textColor="@color/detail_section_title_color"
                 android:textSize="@dimen/building_detail_section_title_text_size"
+                app:fontFamily="@font/opensans_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/historyDetailText" />
@@ -138,10 +153,10 @@
 
             <TextView
                 android:id="@+id/functionDetailText"
+                style="@style/detail_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/functionTitleSeparator"
-                style="@style/detail_text"
                 tools:text="The original gunpowder mills had 4 Incorporating Mills. This was increased to 12 Incorporating mills by the next owners, the British Board of Ordnance, and finally to 24 Incorporating Mills by the third owners, Tobin &amp; Horsfall." />
 
             <androidx.constraintlayout.widget.Group
@@ -157,13 +172,13 @@
                 android:layout_marginTop="@dimen/building_detail_section_vertical_margin"
                 android:background="@color/trivia_section_title_background"
                 android:elevation="20dp"
-                app:fontFamily="@font/opensans_semibold"
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="@string/trivia_section_title"
                 android:textColor="@color/detail_section_title_color"
                 android:textSize="@dimen/building_detail_section_title_text_size"
+                app:fontFamily="@font/opensans_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/functionDetailText" />
@@ -182,10 +197,10 @@
 
             <TextView
                 android:id="@+id/triviaDetailText"
+                style="@style/detail_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/triviaTitleSeparator"
-                style="@style/detail_text"
                 tools:text="The original gunpowder mills had 4 Incorporating Mills. This was increased to 12 Incorporating mills by the next owners, the British Board of Ordnance, and finally to 24 Incorporating Mills by the third owners, Tobin &amp; Horsfall." />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
