@@ -31,17 +31,20 @@
 
         <TextView
             android:id="@+id/building_name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:elevation="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:fontFamily="@font/opensans_regular"
             android:textColor="@color/buildingItemNameColor"
             android:textSize="@dimen/building_list_item_label_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Building One" />
+            app:layout_constraintEnd_toStartOf="@id/chevron"
+            tools:text="Building One, a very long building, the purpose of which is to make sure the ellipsis is working" />
 
         <ImageView
             android:id="@+id/chevron"
