@@ -181,9 +181,9 @@ class MapFragment : Fragment(), OnSymbolClickListener {
     }
 
     private fun setupAttributionFeatures(mapboxMap: MapboxMap) {
-        mapboxMap.uiSettings.isAttributionEnabled = false
+        mapboxMap.uiSettings.isAttributionEnabled = true
         mapboxMap.uiSettings.isCompassEnabled = false
-        mapboxMap.uiSettings.isLogoEnabled = false
+        mapboxMap.uiSettings.isLogoEnabled = true
     }
 
     private fun setUpMapPins(
