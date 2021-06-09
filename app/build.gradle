@@ -24,6 +24,16 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
+    signingConfigs {
+        release {
+            storeFile file("powdermills-release-key.jks")
+            storePassword project.properties['KEYSTORE_PASSWORD']
+            keyAlias project.properties['KEYSTORE_ALIAS']
+            keyPassword project.properties['KEYSTORE_PASSWORD']
+        }
+    }
+
+
     defaultConfig {
         applicationId "com.garrymckee.powdermills"
         minSdkVersion 23
@@ -38,6 +48,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
