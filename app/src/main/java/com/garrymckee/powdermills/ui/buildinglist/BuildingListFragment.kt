@@ -33,7 +33,7 @@ class BuildingListFragment : Fragment() {
         subscribeClickListeners()
         subscribeToBuildingList(buildingListAdapter)
         viewModel.getBuildings()
-        
+
         return binding.root
     }
 
@@ -62,10 +62,21 @@ class BuildingListFragment : Fragment() {
         binding.buildingListTitle
             .setOnClickListener {
                 Toast.makeText(
-                    requireContext(),
-                    "App Version: ${BuildConfig.VERSION_NAME}",
-                    Toast.LENGTH_SHORT
+                    requireContext(), getVersionName(), Toast.LENGTH_SHORT
                 ).show()
             }
+    }
+
+    private fun getVersionName(): String {
+        return "App Version: ${BuildConfig.VERSION_NAME} - ${
+            when {
+                BuildConfig.DEBUG -> {
+                    "Dev"
+                }
+                else -> {
+                    "Release"
+                }
+            }
+        }"
     }
 }
