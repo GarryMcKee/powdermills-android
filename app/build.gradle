@@ -35,11 +35,11 @@ android {
 
 
     defaultConfig {
-        applicationId "com.garrymckee.powdermills"
+        applicationId "com.ballincollig.powdermills"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
-        versionName "1.08"
+        versionName "1.09"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

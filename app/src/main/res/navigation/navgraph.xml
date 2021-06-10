@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.garrymckee.powdermills.ui.map.MapFragment"
+        android:name="com.ballincollig.powdermills.ui.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map">
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/buildingDetailFragment"
-        android:name="com.garrymckee.powdermills.ui.buildingdetail.BuildingDetailFragment"
+        android:name="com.ballincollig.powdermills.ui.buildingdetail.BuildingDetailFragment"
         android:label="BuildingDetailFragment"
         tools:layout="@layout/fragment_building_detail">
         <argument
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/userAgreementFragment"
-        android:name="com.garrymckee.powdermills.ui.useragreement.UserAgreementFragment"
+        android:name="com.ballincollig.powdermills.ui.useragreement.UserAgreementFragment"
         android:label="UserAgreementFragment"
         tools:layout="@layout/fragment_user_agreement">
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.garrymckee.powdermills.ui.splashscreen.SplashFragment"
+        android:name="com.ballincollig.powdermills.ui.splashscreen.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/buildingListFragment"
-        android:name="com.garrymckee.powdermills.ui.buildinglist.BuildingListFragment"
+        android:name="com.ballincollig.powdermills.ui.buildinglist.BuildingListFragment"
         android:label="BuildingListFragment"
         tools:layout="@layout/fragment_building_list">
         <action
