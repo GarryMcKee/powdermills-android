@@ -14,7 +14,8 @@ class PowderMillsApp : Application() {
         //TODO add to build config
         TestFairy.begin(this, "SDK-E9JWuxYB")
 
-        //TODO remove logging for production builds
-        Timber.plant(DebugTree())
+        if(BuildConfig.DEBUG){
+            Timber.plant(DebugTree())
+        }
     }
 }
